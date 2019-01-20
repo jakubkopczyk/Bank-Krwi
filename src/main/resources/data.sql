@@ -2,19 +2,26 @@ insert into grupakrwi(nazwa) values ('AB+'), ('AB-'), ('A+'), ('A-'), ('B+'), ('
 
 insert into dawca(imie, nazwisko, grupa_krwi_id) values
   ('Adam', 'Mickiewicz', 2),
-  ('Marzena', 'Przygoda', 5),
   ('Karolina', 'Mickiewicz', 1),
   ('Tomasz', 'Więckowski', 3),
+  ('Karol', 'Smajda', 4),
+  ('Marzena', 'Przygoda', 5),
   ('Dominika', 'Kaleta', 6),
+  ('Kacper', 'Janda', 7),
+  ('Weronika', 'Duda', 4),
+  ('Sandra', 'Dudziak', 2),
   ('Patryk', 'Kowalski', 8),
   ('Cezary', 'Baryka', 1);
 
 insert into pielegniarka(imie, nazwisko) values
-  ('Izabela', 'Wałęga'),  
-  ('Patrycja', 'Wyspiańska'),
+  ('Izabela', 'Wałęga'),
   ('Monika', 'Pomocna'),
   ('Karolina', 'Duda'),
+  ('Alicja', 'Abramczyk'),
+  ('Patrycja', 'Wyspiańska'),
   ('Paulina', 'Pogodzińska'),
+  ('Lena', 'Wesoła'),
+  ('Agnieszka', 'Bartolewska'),
   ('Katarzyna', 'Wielka');
 
 insert into pobraniekrwi (ilosc, date, pielegniarka_id, dawca_id) values
