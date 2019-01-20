@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wszystkie pielegniarki</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        .alphabet {
+            list-style-type: none;
+            margin:9px auto 0;
+            padding:0;
+            cursor: pointer;
+            width:80%;
+            text-align:center;
+        }
+
+        .alphabet li {
+            float:left;
+            margin:0;
+            padding:0;
+            border-right:1px solid darkgrey;
+            font-size: 13px;
+            -moz-box-sizing:border-box;
+            color:black;
+            display:inline-block;
+            -webkit-box-sizing:border-box;
+            -moz-box-sizing:border-box;
+            box-sizing:border-box;
+            width:3.84%;
+        }
+
+        .alphabet li:last-child {
+            border-right: none;
+        }
+
+        .alphabet li:hover {
+            color:darkred;
+            background-color: lightpink;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div id="containerm">
+        <div id="logo" >
+            <h1>Bank krwi</h1>
+        </div>
+        <div id="nav">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><a class="nav-link" href="/" >Homepage</a> </li>
+                <li  class="list-group-item"><a class="nav-link" onclick="document.forms['logoutForm'].submit()">Wyloguj</a>
+                    <form id="logoutForm" method="POST" th:action="@{/logout}">
+                    </form>
+                </li>
+            </ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Pielęgniarki
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a class="nav-link" href="/dodajPielegniarke">Dodaj</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/wszystkiePielegniarki">Wyświetl</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/usunPielegniarke">Usuń</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Dawcy
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a class="nav-link" href="/dodajDawce">Dodaj</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/wszyscyDawcy">Wyświetl</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/usunDawce">Usuń</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Pobranie krwi
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a class="nav-link" href="/dodajPobranieKrwi">Dodaj</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/wszystkiePobraniaKrwi">Wyświetl</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/sumyGrupKrwi">Podsumowanie</a> </li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=1">AB+</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=2">AB-</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=3">A+</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=4">A-</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=5">B+</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=6">B-</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=7">0+</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=8">0-</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div id="contentm">
+
+        <ul class="alphabet" th:each="sign : ${alphabet}">
+            <li> <a th:href="'/pokazPielegniarke?letter=' + ${sign} " th:text="${sign}">   </a></li>
+        </ul>
+
+            <br><h2>  </h2><br>
+        <br><h2> Pielęgniarki </h2><br>
+
+            <table style="width: 120%"  class="table">
+
+                <thead class="thead-light">
+                <tr>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Edytuj</th>
+                </tr>
+                </thead>
+
+                <tr th:each="nurse: ${pielegniarki}">
+                    <td th:text="${nurse.imie}"> </td>
+                    <td th:text="${nurse.nazwisko}"> </td>
+                    <td> <a th:href="'/update?id=' + ${nurse.id} "> <img src="data:image/png;base64,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" style="width:20px;height:20px;"> </a> </td>
+                </tr>
+
+            </table>
+
+        </div>
+    </div>
+</body>
+</html>

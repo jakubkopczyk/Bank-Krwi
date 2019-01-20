@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pobranie krwi</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        .invalid {
+            border: 1px solid red;
+        }
+        .invalid-feedback {
+            display: none;
+        }
+        .invalid ~ .invalid-feedback {
+            display: block;
+        }
+        .alert {
+            padding: 20px;
+            background-color: #f44336;
+            color: white;
+        }  </style>
+</head>
+<body>
+
+    <div id="containerm">
+        <div id="logo" >
+            <h1>Bank krwi</h1>
+        </div>
+        <div id="nav">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><a class="nav-link" href="/" >Homepage</a> </li>
+                <li  class="list-group-item"><a class="nav-link" onclick="document.forms['logoutForm'].submit()">Wyloguj</a>
+                    <form id="logoutForm" method="POST" th:action="@{/logout}">
+                    </form>
+                </li>
+            </ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Pielęgniarki
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a class="nav-link" href="/dodajPielegniarke">Dodaj</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/wszystkiePielegniarki">Wyświetl</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/usunPielegniarke">Usuń</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Dawcy
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a class="nav-link" href="/dodajDawce">Dodaj</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/wszyscyDawcy">Wyświetl</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/usunDawce">Usuń</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Pobranie krwi
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a class="nav-link" href="/dodajPobranieKrwi">Dodaj</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/wszystkiePobraniaKrwi">Wyświetl</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/sumyGrupKrwi">Podsumowanie</a> </li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=1">AB+</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=2">AB-</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=3">A+</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=4">A-</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=5">B+</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=6">B-</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=7">0+</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=8">0-</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div id="contentm">
+
+    <div th:if="${errorField}" class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Błąd!</strong>
+        <strong th:text="'Pola ' + ${errorField} + ' są błędnie uzupełnione'" > </strong>
+    </div>
+    <h1>Dodaj nowe pobranie krwi</h1>
+
+
+        <form th:action="@{/zapiszPobranieKrwi}" th:object="${pobrania}" method="post" novalidate
+              style="width:  300px;  margin:  50px  auto;  text-align:  center">
+
+            <label>Data</label><br>
+            <input class="form-control" type="date" th:field="*{date}" th:errorclass="invalid"><br>
+
+            <label>Pacjent</label><br>
+            <div class="input-group mb-3">
+                <select th:field="*{dawca.id}" class="custom-select">
+                    <option th:each="dawcaOpcja: ${dawcy}" th:text="|${dawcaOpcja.nazwisko} ${dawcaOpcja.imie}|" th:value="${dawcaOpcja.id}" class="custom-select"></option>
+                </select>
+            </div>
+
+            <label>Pielęgniarka</label><br>
+            <div class="input-group mb-3">
+                <select th:field="*{pielegniarka.id}" class="custom-select">
+                    <option th:each="pielegniarkaOpcja: ${pielegniarki}" th:text="|${pielegniarkaOpcja.nazwisko} ${pielegniarkaOpcja.imie}|" th:value="${pielegniarkaOpcja.id}" class="custom-select"></option>
+                </select>
+            </div>
+
+            <label>Ilość krwi</label><br>
+            <input type="number" step="0.5" th:field="*{ilosc}" th:errorclass="invalid" class="form-control">
+            <div class="invalid-feedback">
+                Wprowadzona wartość jest nieprawidłowa
+            </div>
+            <br>
+            <button th:type="submit" class="btn btn-primary mb-2">Zapisz</button>
+
+        </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+#containerm
+{
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#logo
+{
+    background-color: #9e2127;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+#nav
+{
+    float: left;
+    background-color: lightgray;
+    width: 220px;
+    min-height: 620px;
+    padding: 10px;
+}
+#contentm
+{
+    float: left;
+    padding: 20px;
+    width: 640px;
+}
+#inner {
+    width: 50%;
+    margin: 0 auto;
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blad</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        .alphabet {
+            list-style-type: none;
+            margin:9px auto 0;
+            padding:0;
+            cursor: pointer;
+            width:80%;
+            text-align:center;
+        }
+
+        .alphabet li {
+            float:left;
+            margin:0;
+            padding:0;
+            border-right:1px solid darkgrey;
+            font-size: 13px;
+            -moz-box-sizing:border-box;
+            color:black;
+            display:inline-block;
+            -webkit-box-sizing:border-box;
+            -moz-box-sizing:border-box;
+            box-sizing:border-box;
+            width:3.84%;
+        }
+
+        .alphabet li:last-child {
+            border-right: none;
+        }
+
+        .alphabet li:hover {
+            color:darkred;
+            background-color: lightpink;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="containerm">
+        <div id="logo" >
+            <h1>Bank krwi</h1>
+        </div>
+        <div id="nav">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><a class="nav-link" href="/" >Homepage</a> </li>
+                <li  class="list-group-item"><a class="nav-link" onclick="document.forms['logoutForm'].submit()">Wyloguj</a>
+                    <form id="logoutForm" method="POST" th:action="@{/logout}">
+                    </form>
+                </li>
+            </ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Pielęgniarki
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a class="nav-link" href="/dodajPielegniarke">Dodaj</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/wszystkiePielegniarki">Wyświetl</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/usunPielegniarke">Usuń</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Dawcy
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a class="nav-link" href="/dodajDawce">Dodaj</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/wszyscyDawcy">Wyświetl</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/usunDawce">Usuń</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Pobranie krwi
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a class="nav-link" href="/dodajPobranieKrwi">Dodaj</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/wszystkiePobraniaKrwi">Wyświetl</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/sumyGrupKrwi">Podsumowanie</a> </li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=1">AB+</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=2">AB-</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=3">A+</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=4">A-</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=5">B+</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=6">B-</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=7">0+</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=8">0-</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div id="contentm">
+        <ul class="alphabet" th:each="sign : ${alphabet}">
+            <li> <a th:href="'/pokazPielegniarke?letter=' + ${sign} " th:text="${sign}">   </a></li>
+        </ul>
+        <br><h2>  </h2><br>
+        <h1>Brak danych o pielęgniarce</h1>
+        </div>
+    </div>
+</body>
+</html>

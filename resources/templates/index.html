@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        div {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div id="containerm">
+        <div id="logo" >
+            <h1>Bank krwi</h1>
+            <h6  th:text="'Witaj, ' + ${user} + '!'" ></h6>
+        </div>
+        <div id="nav">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><a class="nav-link" href="/" >Homepage</a> </li>
+                <li  class="list-group-item"><a class="nav-link" onclick="document.forms['logoutForm'].submit()">Wyloguj</a>
+                <form id="logoutForm" method="POST" th:action="@{/logout}">
+                </form>
+                </li>
+            </ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Pielęgniarki
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a class="nav-link" href="/dodajPielegniarke">Dodaj</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/wszystkiePielegniarki">Wyświetl</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/usunPielegniarke">Usuń</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Dawcy
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a class="nav-link" href="/dodajDawce">Dodaj</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/wszyscyDawcy">Wyświetl</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/usunDawce">Usuń</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Pobranie krwi
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a class="nav-link" href="/dodajPobranieKrwi">Dodaj</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/wszystkiePobraniaKrwi">Wyświetl</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/sumyGrupKrwi">Podsumowanie</a> </li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=1">AB+</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=2">AB-</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=3">A+</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=4">A-</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=5">B+</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=6">B-</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=7">0+</a></li>
+                        <li class="list-group-item"><a class="nav-link" href="/grupuj?id=8">0-</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div id="contentm">
+            <br>
+            <h3>Grupy krwi: co to jest?</h3>
+            <div>
+                <p>Grupy krwi to zestawy antygenów (specyficznych białek) występujących na powierzchni krwinek czerwonych (erytrocytów). Erytrocyty odpowiadają za zlepianie się ze sobą krwinek, czyli proces aglutynacji. Grupa krwi stabilizuje się około drugiego roku życia i już nie zmienia, jest stałą cechą. To, jaką ma się grupę krwi, jest szczególnie ważne przy transfuzji (przetaczaniu) krwi, przeszczepianiu narządów oraz ciąży - trzeba sprawdzić, czy nie będzie konfliktu serologicznego.
+                </p>
+            </div>
+            <br>
+            <h3>Grupy krwi: historia</h3>
+            <div>
+                <p>Grupy krwi odkrył Karl Landsteiner, austriacki badacz, w 1901 roku. Przed jego odkryciem nie wiedziano, dlaczego niektóre transfuzje się udają, a inne - nie. Landsteiner dostrzegł, że na erytrocytach znajdują się dwa antygeny, które warunkują ich zlepianie się. Ludwik Hirszfeld oraz Emil von Dungern zebrali dotychczasową wiedzę o grupach krwi i stworzyli fundamenty nauki o nich. To dzięki nim mamy klasyfikację A, B, AB i 0 - w 1928 takie oznaczenie zaczęło być używane na całym świecie.
+                <a  href="http://zdrowie.gazeta.pl/Zdrowie/7,140283,23658526,grupy-krwi-co-jest-rodzaje-grup-krwi-i-konflikt-serologiczny.html" target="_blank" rel="noopener noreferrer">Więcej</a>
+                </p>
+            </div>
+            <br>
+            <img src="https://www.odkrywamyzakryte.com/wp-content/uploads/2017/05/66416531_ml.jpg" style="width:600px;height:600px;">
+        </div>
+    </div>
+
+</body>
+</html>
